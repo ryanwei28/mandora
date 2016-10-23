@@ -84,12 +84,13 @@ init = function ( _parent  )
     grow.x , grow.y = _SCREEN.CENTER.X , _SCREEN.CENTER.Y
     grow:play()
 
+    _parent:insert( grow )
+    _parent:insert( container )
+    _parent:insert( container2 )
+
     tutorial = display.newImageRect( _parent, "images/banner.png", 2000*WIDTH , 1000*HEIGHT)
     tutorial.x , tutorial.y = _SCREEN.CENTER.X , _SCREEN.CENTER.Y
     tutorial.isVisible = false
-
-    _parent:insert( container )
-    _parent:insert( container2 )
 
     --加入遮罩
     container2.x , container2.y = _SCREEN.CENTER.X , _SCREEN.CENTER.Y

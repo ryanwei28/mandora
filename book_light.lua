@@ -18,11 +18,13 @@ local scene = composer.newScene( )
 --=======================================================================================
 local background
 local skip
+local url  = "https://docs.coronalabs.com/"
+
 --=======================================================================================
 --宣告各種函數函數
 --=======================================================================================
-
 local init
+local showWebView
 --=======================================================================================
 --定義各種函式
 --=======================================================================================
@@ -31,11 +33,18 @@ init = function ( _parent  )
     background.x , background.y = _SCREEN.CENTER.X , _SCREEN.CENTER.Y
 
     skip = display.newImageRect( _parent, "images/skip.png", 100*WIDTH , 60*HEIGHT )
-    skip.x , skip.y =  _SCREEN.CENTER.X , _SCREEN.CENTER.Y
+    skip.x , skip.y =  _SCREEN.CENTER.X*1.7 , _SCREEN.CENTER.Y*1.9
 
     skip:addEventListener( "tap", function (  )
         composer.gotoScene( "opening" )
+        webView:removeSelf( )
     end )
+end
+
+showWebView = function (  )
+    webView = native.newWebView( _SCREEN.CENTER.X , _SCREEN.CENTER.Y - 50 , _SCREEN.W , 1000*HEIGHT )
+    webView:request(url)
+    webView.hasBackground = false
 end
 
 
@@ -52,7 +61,6 @@ function scene:create(event)
 
    --接下來把會出現在畫面的東西，加進sceneGroup裡面，這個非常重要
    init(sceneGroup)
-
 end
 
 
@@ -66,6 +74,7 @@ function  scene:show( event)
         print('scene:show will')
         --畫面即將要推上螢幕時要執行的程式碼寫在這邊
         audio.play( bgMusic )
+        showWebView()
     elseif ( "did" == phase ) then
         print('scene:show did')
         --把畫面已經被推上螢幕後要執行的程式碼寫在這邊
