@@ -18,7 +18,7 @@ local scene = composer.newScene( )
 --=======================================================================================
 local background
 local skip
-local url  = "https://docs.coronalabs.com/"
+local url  = "https://docs.coronalabs.com"
 
 --=======================================================================================
 --宣告各種函數函數
@@ -44,7 +44,7 @@ end
 showWebView = function (  )
     webView = native.newWebView( _SCREEN.CENTER.X , _SCREEN.CENTER.Y - 50 , _SCREEN.W , 1000*HEIGHT )
     webView:request(url)
-    webView.hasBackground = false
+    webView.hasBackground = true
 end
 
 
