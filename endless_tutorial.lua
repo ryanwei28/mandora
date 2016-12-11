@@ -78,7 +78,7 @@ local newMandora
 local pullMandora
 local tutorialComplete
 local newMandora_old
-
+local bezierCurve 
 --=======================================================================================
 --定義各種函式
 --=======================================================================================
@@ -217,7 +217,6 @@ end
 --拔起曼陀羅產生一個新的mature
 newMandora = function (  )
     pullNum = pullNum + 1 
-    -- text2Num = 1
     mature = display.newImageRect( doraGroup ,"images/mature.png", 160 , 130 )
     physics.addBody( mature , "dynamics" )
     mature.x , mature.y  = _SCREEN.CENTER.X , _SCREEN.CENTER.Y*1.2
@@ -226,6 +225,22 @@ newMandora = function (  )
         physics.removeBody( mature )
         transition.to( mature , {time = 100 , x = doraPosition[pullNum].x , y = 135 } )
     end )
+    -- bezierCurve(mature , mature.x , mature.y , doraPosition[pullNum].x , 135 , 200 , - 100)
+end
+
+-- target :要操控的元件, ox :起點x座標 , oy: 起點y座標 , dx :終點x座標 , dy : 終點y座標  , mx : 控制點x座標 , my : 控制點y座標
+function bezierCurve( target , ox , oy , dx , dy , mx , my)
+    local timeVal = 0
+    timer.performWithDelay( 10, function ( e )
+        timeVal = timeVal + 0.04
+        local px = (1-timeVal)*((1-timeVal)*ox + timeVal*mx) + timeVal*((1-timeVal)*mx + timeVal*dx)
+        local py = (1-timeVal)*((1-timeVal)*oy + timeVal*my) + timeVal*((1-timeVal)*my + timeVal*dy)
+        target.x , target.y = px , py
+
+        if (math.abs(px - dx) <= 1 and math.abs(py - dy) <= 1) then
+            timer.cancel( e.source )
+        end
+    end , -1 )
 end
 
 --拔起老的曼陀羅產生一個old_mature

@@ -231,14 +231,14 @@ init = function ( sceneGroup )
         end )
     end} )
     --延時一段時間後進入開場畫面
-    timer.performWithDelay( 3000 , function (  )
+    startOpening = timer.performWithDelay( 3000 , function (  )
         --將畫面帶入選單
         transition.to( openGroup , {time = 5000 , y = _SCREEN.H * 2 ,transition = easing.inCubic } )
         transition.to( houseGroup , {time = 5000 , y = _SCREEN.H * 2 ,transition = easing.inCubic } )
         transition.to( btnGroup , {time = 5000 , y = _SCREEN.H * 2 ,transition = easing.inCubic} )
         --上方LOGO持續移動
-        transition.to( logoGroup, {time = 5000 , y =  _SCREEN.CENTER.Y*-2.8 ,onComplete = function (  )
-            transition.to( logoGroup, {time = 5000 , y = _SCREEN.CENTER.Y*-2.88 , transition = easing.continuousLoop
+        transition.to( logoGroup, {time = 5000 , y =  _SCREEN.CENTER.Y * -2.8 ,onComplete = function (  )
+            transition.to( logoGroup, {time = 5000 , y = _SCREEN.CENTER.Y * -2.88 , transition = easing.continuousLoop
             , iterations =  -1 } )
             transition.to (straps , {time = 2000 , rotation = 5 ,transition = easing.continuousLoop
             , iterations =  -1 })
