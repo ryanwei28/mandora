@@ -116,7 +116,7 @@ init = function ( _parent  )
     container.x , container.y = _SCREEN.CENTER.X , _SCREEN.CENTER.Y
 
 
-    timer.performWithDelay( 100 , function (  )
+    timer.performWithDelay( 1000 , function (  )
 
         if #numData > 0 then
             getNum = math.random( 1 , #numData )
